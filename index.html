@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G5 TA Duty Guide</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #5f5f5f;
+    --paper: #ffffff;
+    --blush: #f5e8e1;
+    --blush-card: #fbf5f1;
+    --mint: #e6f2ee;
+    --accent: #e08a00;
+    --line: #2b2b2b;
+    --row: #f7f6f4;
+    --nav: 56px;
+    --serif: Georgia, "Times New Roman", "Noto Serif TC", serif;
+    --sans: "Segoe UI", "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--nav); }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 18px/1.6 var(--sans);
+  }
+
+  /* 上方固定的章節按鈕列 */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    height: var(--nav); display: flex; align-items: center; gap: 8px;
+    padding: 0 16px; overflow-x: auto; white-space: nowrap;
+    background: rgba(255,255,255,.96); border-bottom: 1px solid #ddd;
+  }
+  nav a {
+    flex: none; padding: 4px 14px; font-size: 16px;
+    border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ink); text-decoration: none;
+  }
+  nav a:hover { background: var(--blush); }
+
+  section { padding: 40px 16px; }
+  section.blush { background: var(--blush); }
+  .wrap { max-width: 960px; margin: 0 auto; width: 100%; }
+
+  /* 每個章節至少一個螢幕高（扣掉按鈕列），內容多就自動變長；內容垂直置中 */
+  header, section {
+    min-height: calc(100vh - var(--nav)); min-height: calc(100svh - var(--nav));
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  header { padding: 48px 16px 40px; }
+  header h1 {
+    font: 700 clamp(44px, 9vw, 80px)/1.02 var(--serif);
+    margin: 0 0 16px;
+  }
+  header p { font-size: 24px; margin: 0; }
+
+  .kicker {
+    color: var(--accent); font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; font-size: 17px; margin: 0;
+  }
+  h2 {
+    font: 700 clamp(32px, 6vw, 48px)/1.1 var(--serif);
+    margin: 0 0 8px;
+  }
+  .sub { font-size: 20px; color: var(--muted); margin: 0 0 24px; }
+  h3 { font-size: 21px; color: var(--muted); text-align: center; margin: 0 0 10px; }
+  h4 { font-size: 20px; margin: 0 0 8px; }
+
+  /* 時間膠囊 */
+  .pills { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 28px; }
+  .pill {
+    flex: 1 1 180px; text-align: center;
+    border: 2px solid var(--line); border-radius: 999px;
+    background: var(--blush); padding: 10px 16px;
+    font-size: 22px; font-weight: 700; color: var(--muted);
+  }
+  section.blush .pill { background: var(--paper); }
+
+  /* 卡片 */
+  .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }
+  .card {
+    border: 1px solid var(--line); border-radius: 18px;
+    background: var(--paper); padding: 18px 22px;
+  }
+  section.blush .card { background: var(--blush-card); }
+  .card ul { margin: 0; padding-left: 20px; color: var(--muted); }
+  .card li + li { margin-top: 6px; }
+  .card p { margin: 0; color: var(--muted); }
+  .stack > * + * { margin-top: 20px; }
+  .glance .card { text-align: center; font-size: 22px; font-weight: 700; color: var(--muted); }
+  .hl { color: var(--accent); font-weight: 700; }
+
+  .note {
+    background: var(--mint); padding: 16px 20px; border-radius: 8px;
+    margin: 20px 0 0; font-style: italic;
+  }
+  .prose ul { padding-left: 22px; }
+  .prose li + li { margin-top: 6px; }
+
+  /* 表格 */
+  .table-box { overflow-x: auto; margin-top: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 18px; background: var(--paper); }
+  th { text-align: left; color: #344657; font-weight: 400; padding: 10px 12px; border-bottom: 2px solid #ccc; }
+  td { padding: 10px 12px; border-bottom: 1px solid #e3e3e3; vertical-align: top; }
+  tbody tr:nth-child(odd) { background: var(--row); }
+  td:first-child { font-weight: 700; }
+
+  .two { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+
+  .phone { font: italic 700 clamp(36px, 7vw, 56px)/1.2 var(--serif); margin: 8px 0 16px; }
+  .big { font-size: 22px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#glance">At A Glance</a>
+  <a href="#morning">Morning Recess</a>
+  <a href="#snack">Snack Recess</a>
+  <a href="#lunch">Lunch Recess</a>
+  <a href="#indoor-snack">Indoor Snack Recess</a>
+  <a href="#indoor-lunch">Indoor Lunch Recess</a>
+  <a href="#to-mandarin">Transitions to Mandarin</a>
+  <a href="#to-pa">Transitions to Performing Arts</a>
+  <a href="#from-pa">Transitions from Performing Arts</a>
+  <a href="#rerouting">Rerouting</a>
+  <a href="#late">Late Start Days</a>
+  <a href="#after">After-School Duty</a>
+  <a href="#health">Health Office Reporting</a>
+</nav>
+
+<header>
+  <div class="wrap">
+    <h1>G5<br>Teaching<br>Assistant</h1>
+    <p>Duty Guide 2026-2027</p>
+  </div>
+</header>
+
+<!-- ===== At A Glance ===== -->
+<section id="glance" class="blush glance">
+  <div class="wrap">
+    <h2>At A Glance</h2>
+    <p class="sub">Key times for regular and late-start days.</p>
+    <div class="grid">
+      <div><h3>Morning Recess</h3><div class="card">7:13 AM · Whistle 7:38 AM</div></div>
+      <div><h3>Snack Recess</h3><div class="card">8:45 AM · Whistle 8:58 AM</div></div>
+      <div><h3>Lunch Recess</h3><div class="card">11:50 AM · Students’ Out 12:05 PM · Whistle 12:40 PM</div></div>
+      <div><h3>Late Start Days</h3><div class="card">8:55 AM · Whistle 9:25 AM, all grades</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Morning Recess ===== -->
+<section id="morning">
+  <div class="wrap">
+    <p class="kicker">Outdoor Supervision</p>
+    <h2>Morning Recess</h2>
+    <div class="pills"><div class="pill">Starts 7:15</div><div class="pill">Whistle 7:38</div></div>
+    <div class="grid">
+      <div>
+        <h3>Bouldering Cube/Monkey Bar</h3>
+        <div class="card"><ul>
+          <li>Open the door at 7:37 AM and close it when all students are in.</li>
+          <li>Stay by the door until all students have gone upstairs.</li>
+          <li>Check that the area is clear and everyone has transitioned safely before leaving.</li>
+        </ul></div>
+      </div>
+      <div>
+        <h3>Four Squares</h3>
+        <div class="card"><ul>
+          <li>Remind students to place bags in the designated area: <span class="hl">Lane 10 and beyond.</span></li>
+          <li>After the whistle, stand in front of the Grade 2 bags as students go upstairs so they do not cross or step into that area.</li>
+        </ul></div>
+      </div>
+      <div>
+        <h3>Basketball Court</h3>
+        <div class="card"><ul>
+          <li>On <span class="hl">odd days</span>, Grade 5 students may play.</li>
+          <li>On even days, Grade 5 may play only if Grades 3 and 4 are not using the court. Give Grades 3 and 4 priority if they want to play.</li>
+          <li>Stay until all Grade 5 students leave the court and head upstairs. Sweep the field for anyone left behind.</li>
+          <li>Stop and redirect running or behavior that does not meet expectations.</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Snack Recess ===== -->
+<section id="snack" class="blush">
+  <div class="wrap">
+    <h2>Snack Recess</h2>
+    <div class="pills"><div class="pill">Starts 8:43</div><div class="pill">Whistle 8:58</div></div>
+    <div class="grid">
+      <div>
+        <h3>Four Squares/Tech Cube</h3>
+        <div class="card"><ul>
+          <li>This is the only place Grade 5 students may eat snacks.</li>
+          <li>Remind students to dispose of trash and keep the area clean.</li>
+        </ul></div>
+      </div>
+      <div>
+        <h3>Upper Field</h3>
+        <div class="card"><ul>
+          <li>No eating is allowed on the field. Direct students who are eating there to the designated eating area.</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lunch Recess ===== -->
+<section id="lunch">
+  <div class="wrap prose">
+    <h2>Lunch Recess</h2>
+    <!-- 原網站這裡寫 Whistle 8:58，2026-10-24 華生確認改成 12:40 -->
+    <div class="pills"><div class="pill">Starts 11:50</div><div class="pill">Students’ Out 12:05</div><div class="pill">Whistle 12:40</div></div>
+    <h4>Inside the cafeteria</h4>
+    <ul>
+      <li>If the serving line has no monitor or fewer than two TAs and you are already in the cafeteria, help supervise the serving area. Make sure students walk, wait their turn, do not cut in line, and follow cafeteria expectations.</li>
+      <li>Once most students are seated and eating, return to your assigned duty spot. Calmly redirect running, excessive noise, or other behavior that does not meet expectations. If a student runs, have them go back and walk.</li>
+    </ul>
+    <p class="note" style="font-style:normal"><b>Food stays inside.</b> Students must finish eating in the cafeteria before leaving. Ask students eating in a hallway to stop and finish in the designated eating area.</p>
+    <!-- 原網站這裡另起一段 Lunch Recess，2026-10-24 華生指定合併成一段 -->
+    <div class="two" style="margin-top:28px">
+      <div>
+        <h4>On the playground</h4>
+        <p>Stand somewhere visible and accessible, with a clear view of students—not behind pillars or walls. Be ready to step in and redirect students when needed.</p>
+      </div>
+      <div>
+        <h4>When to leave the cafeteria</h4>
+        <div class="table-box"><table>
+          <thead><tr><th>Assigned spot</th><th>Leave cafeteria</th><th>Arrive at spot</th></tr></thead>
+          <tbody>
+            <tr><td>Basketball Court, Zone 1, Upper Field</td><td>12:10 PM</td><td>12:15 PM</td></tr>
+            <tr><td>Bouldering Cube, Four Squares, Temple</td><td>12:15 PM</td><td>12:20 PM</td></tr>
+            <tr><td>Tower A</td><td>12:20 PM</td><td>12:25 PM</td></tr>
+            <tr><td>Net</td><td>12:25 PM</td><td>12:30 PM</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Indoor Snack Recess ===== -->
+<section id="indoor-snack" class="blush">
+  <div class="wrap">
+    <h2>Indoor Snack Recess</h2>
+    <div class="pills"><div class="pill">8:43</div></div>
+    <div class="table-box"><table>
+      <thead><tr><th>Assigned spot</th><th>Teaching assistant</th></tr></thead>
+      <tbody>
+        <tr><td>Mandarin Hallway</td><td>Betty C.</td></tr>
+        <tr><td>Chinese Library</td><td>Melody</td></tr>
+        <tr><td>Lower School Office</td><td>Shihara</td></tr>
+        <tr><td>Grade 5 Hallway</td><td>Sebina</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Students may not visit or enter other classrooms. If teachers are meeting in the classroom, the TA decides where the class should stay: in front of the musical instrument cubbies or in a shared classroom with the closest available class.</p>
+  </div>
+</section>
+
+<!-- ===== Indoor Lunch Recess ===== -->
+<section id="indoor-lunch">
+  <div class="wrap">
+    <h2>Indoor Lunch Recess</h2>
+    <div class="pills"><div class="pill">12:02</div></div>
+    <p class="big">These TAs leave the cafeteria and go directly to their assigned areas:</p>
+    <div class="table-box"><table>
+      <thead><tr><th>Assigned spot</th><th>Teaching assistant(s)</th></tr></thead>
+      <tbody>
+        <tr><td>Library</td><td>Betty L.</td></tr>
+        <tr><td>LS Staircase</td><td>Betty H.</td></tr>
+        <tr><td>2nd Floor staircase</td><td>Amy</td></tr>
+        <tr><td>Grade 5 Hallways</td><td>Maddy and Angela</td></tr>
+      </tbody>
+    </table></div>
+    <!-- 原網站這裡另起一段 Indoor Lunch Recess，2026-10-24 華生指定合併成一段 -->
+    <p class="big" style="margin-top:32px">These TAs leave the cafeteria and go directly to their assigned areas:</p>
+    <div class="table-box"><table>
+      <thead><tr><th>Assigned spot</th><th>Teaching assistant</th><th>Leave and go upstairs</th></tr></thead>
+      <tbody>
+        <tr><td>Serving Line</td><td>Sebina</td><td>12:10 PM</td></tr>
+        <tr><td>Brown Tables</td><td>Melody</td><td>12:15 PM</td></tr>
+        <tr><td>Courtyard</td><td>Shihara</td><td>12:20 PM</td></tr>
+        <tr><td>Red Tables</td><td>Betty C.</td><td>12:25 PM</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">If many students remain in the serving line after 12:10 PM, the serving-line TA should stay a little longer and use their best judgment.</p>
+  </div>
+</section>
+
+<!-- ===== Transitions to Mandarin ===== -->
+<section id="to-mandarin" class="blush">
+  <div class="wrap">
+    <h2>Transitions</h2>
+    <p class="sub">to Mandarin</p>
+    <div class="table-box"><table>
+      <thead><tr><th>Assigned spot</th><th>Teaching assistant(s)</th></tr></thead>
+      <tbody>
+        <tr><td>Grade 5 Hallway</td><td>Sebina</td></tr>
+        <tr><td>4th Floor Stairway · Front</td><td>Angela</td></tr>
+        <tr><td>2nd Floor Stairway · Front</td><td>Betty C.</td></tr>
+        <tr><td>4th Floor Stairway · Back</td><td>Amy</td></tr>
+        <tr><td>2nd Floor Stairway · Back</td><td>Shihara</td></tr>
+        <tr><td>Mandarin Hallway</td><td>Betty L. and Melody</td></tr>
+        <tr><td>Lower School Office</td><td>Betty H.</td></tr>
+        <tr><td>Chinese Library</td><td>Maddy</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== Transitions to Performing Arts ===== -->
+<section id="to-pa">
+  <div class="wrap">
+    <h2>Transitions</h2>
+    <p class="sub">to Performing Arts</p>
+    <div class="table-box"><table>
+      <thead><tr><th>Coming from</th><th>Where to go and what to do</th></tr></thead>
+      <tbody>
+        <tr><td>P.E.</td><td>Walk with students to the 2nd-floor Choir Room.</td></tr>
+        <tr><td>Art</td><td>Walk with students to the Office of Learning; stay and redirect students.</td></tr>
+        <tr><td>Music</td><td>Stand in front of Harmony Theater; stay and redirect students.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Classes with <b>Music or Art as specials must not</b> use the inside spiral staircase in Building A. Use the outside stairs when traveling to or from the 2nd or 3rd floor.</p>
+  </div>
+</section>
+
+<!-- ===== Transitions from Performing Arts ===== -->
+<section id="from-pa" class="blush">
+  <div class="wrap">
+    <h2>Transitions</h2>
+    <p class="sub">from Performing Arts</p>
+    <div class="table-box"><table>
+      <thead><tr><th>Assigned spot</th><th>Teaching assistant(s)</th></tr></thead>
+      <tbody>
+        <tr><td>G5 Hallway</td><td>Maddy</td></tr>
+        <tr><td>Upper School Library</td><td>Sebina</td></tr>
+        <tr><td>Upper School Hallway</td><td>Betty L.</td></tr>
+        <tr><td>Upper School Spiral stairs</td><td>Angela</td></tr>
+        <tr><td>Upper School 3rd Floor</td><td>Betty H.</td></tr>
+        <tr><td>2nd Floor Office of Learning</td><td>Melody</td></tr>
+        <tr><td>2nd Floor Spiral · Choir Room</td><td>Amy</td></tr>
+        <tr><td>Harmony Theater</td><td>Shihara and Betty C.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Remind students to transition quietly, especially through the Upper School area.</p>
+  </div>
+</section>
+
+<!-- ===== Rerouting ===== -->
+<section id="rerouting">
+  <div class="wrap">
+    <h2>Rerouting</h2>
+    <p class="sub">during Upper School Exams</p>
+    <p class="note">If the 4th floor is inaccessible, reroute students through the 2nd floor when returning to the 4th floor.</p>
+    <div class="table-box"><table>
+      <thead><tr><th>Assigned spot</th><th>Teaching assistant(s)</th></tr></thead>
+      <tbody>
+        <tr><td>G5 Hallway</td><td>Maddy</td></tr>
+        <tr><td>Upper School 3rd Floor</td><td>Angela and Betty H.</td></tr>
+        <tr><td>2nd Floor Middle School Area · blue lockers</td><td>Sebina</td></tr>
+        <tr><td>2nd Floor Office of Learning</td><td>Melody</td></tr>
+        <tr><td>2nd Floor Spiral · Choir Room</td><td>Betty L. and Amy</td></tr>
+        <tr><td>Harmony Theater</td><td>Shihara and Betty C.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== Late Start Days ===== -->
+<section id="late" class="blush">
+  <div class="wrap stack">
+    <h2>Late Start Days</h2>
+    <div class="pills"><div class="pill">Starts 8:55</div><div class="pill">Whistle 9:25</div></div>
+    <div class="card"><ul>
+      <li>Usually, only one Grade 5 TA is assigned to recess duty at the Basketball Court.</li>
+      <li>After the whistle, stay until students begin leaving the court and heading upstairs.</li>
+      <li>Do not leave too early. Stand in front of the door to help manage the larger flow of students on the stairs; use the same door as during lunch recess.</li>
+    </ul></div>
+    <div class="card" style="background:var(--paper)"><ul>
+      <li>If two or three Grade 5 TAs are assigned, use the usual locations: <b><i>Basketball Court, Four Squares, and Bouldering Cube / Monkey Bars.</i></b> Always check the Child Care Duty for Late Start Days Schedule.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ===== After-School Duty ===== -->
+<section id="after">
+  <div class="wrap stack">
+    <h2>After-School Duty</h2>
+    <p class="note">2:50–3:00 PM: One member of the cafeteria duty pair supervises students at the snack bar entrance while they wait. Lower School students, including those with parents, wait until 3:00 PM to enter the snack bar.</p>
+    <div class="card">
+      <p>In the afternoon, parents are asked to use the Legacy Commons area. The red Lower School tables and Middle School square tables remain supervised student spaces. Direct parents and guardians away from the red tables to the Upper School area.</p>
+      <p>Shared-space guidelines</p>
+      <p><b>Pick-up first:</b> A Lower School student joining a parent or guardian must first be picked up outside the lobby and accompanied to the cafeteria.</p>
+      <p><b>Parent supervision:</b> Parents supervise their own children; staff supervising Upper School students are not responsible for younger children.</p>
+      <p><b>Respect the space:</b> Keep voices calm and children walking while Upper School students work.</p>
+      <p>Students accompanied by parents or guardians do not need to tap in with an ID card.</p>
+      <p>Coordinate with your duty partner to decide who will collect the laptop from the Guard House.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Health Office Reporting ===== -->
+<section id="health" class="blush">
+  <div class="wrap">
+    <h2>Health Office Reporting</h2>
+    <p class="phone">Call extension #220.</p>
+    <p class="big">Be ready to report the <b><i>student’s full name, grade, whether they are conscious or unconscious, and the part of the body injured.</i></b></p>
+  </div>
+</section>
+
+<script>
+  // 電腦上用滑鼠滾輪也能左右捲動按鈕列
+  const nav = document.querySelector('nav');
+  nav.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { nav.scrollLeft += e.deltaY; e.preventDefault(); }
+  }, { passive: false });
+</script>
+
+</body>
+</html>
