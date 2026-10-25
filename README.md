@@ -22,7 +22,7 @@ https://sgmy2024.my.canva.site/g5-teaching-assistant
 - [x] 原網站有兩段 Indoor Lunch Recess，華生指定合併成一段（2026-10-24）
 - [x] 每個章節至少一個螢幕高、內容垂直置中，內容多就自動變長，不自動對齊（2026-10-24 華生指定）
 - [x] 上方加一排章節按鈕（固定在畫面頂端，13 個章節），點了平滑捲到該章節；章節高度扣掉按鈕列（2026-10-24 華生指定）
-- [ ] 原網站最上方有一張照片，這版沒放（照片版權不確定）
+- [x] 原網站最上方的照片已放進標題頁當背景（`images/hero.jpg`，從原網站下載，800×533；2026-10-25 華生指定）
 
 ## 下一步
 
@@ -33,6 +33,7 @@ https://sgmy2024.my.canva.site/g5-teaching-assistant
 | 檔案 | 說明 |
 | :-- | :-- |
 | `index.html` | 網站本體，雙擊就能開 |
+| `images/hero.jpg` | 標題頁背景照片（要跟 index.html 放在一起） |
 | `reference/canva-text.txt` | 參考網站的全部文字（2026-10-24 抓取） |
 | `reference/canva-layout.txt` | 參考網站文字照畫面由上到下的順序（含字級、顏色） |
 | `reference/canva-top.png` | 參考網站首頁截圖（手機寬度） |
