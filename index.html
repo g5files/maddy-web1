@@ -28,7 +28,11 @@
     --sans: "Site Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: var(--nav); }
+  html {
+    scroll-behavior: smooth; scroll-padding-top: var(--nav);
+    /* 不讓 App 內建瀏覽器（Messenger、LINE 等）自動把字放大 */
+    -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+  }
   body {
     margin: 0;
     background: var(--paper);
