@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>G5 TA Duty Guide</title>
 <style>
+  /* 字體檔放在 fonts/ 資料夾，每支手機、電腦都用同一種字體（Noto，免費授權見 fonts/OFL.txt） */
+  @font-face { font-family: "Site Serif"; src: url("fonts/noto-serif-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Site Serif"; src: url("fonts/noto-serif-latin-700-italic.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Site Sans"; src: url("fonts/noto-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Site Sans"; src: url("fonts/noto-sans-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Site Sans"; src: url("fonts/noto-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Site Sans"; src: url("fonts/noto-sans-latin-700-italic.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+
   :root {
     --ink: #1a1a1a;
     --muted: #5f5f5f;
@@ -16,8 +24,8 @@
     --line: #2b2b2b;
     --row: #f7f6f4;
     --nav: 56px;
-    --serif: Georgia, "Times New Roman", "Noto Serif TC", serif;
-    --sans: "Segoe UI", "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+    --serif: "Site Serif", Georgia, "Times New Roman", serif;
+    --sans: "Site Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: var(--nav); }
@@ -439,7 +447,8 @@
   const nav = document.querySelector('nav');
   const setNavHeight = () => document.documentElement.style.setProperty('--nav', nav.offsetHeight + 'px');
   setNavHeight();
-  addEventListener('resize', setNavHeight);
+  // 螢幕寬度改變、字體檔載入完成時，按鈕列高度都可能變，變了就重新量
+  new ResizeObserver(setNavHeight).observe(nav);
 </script>
 
 </body>

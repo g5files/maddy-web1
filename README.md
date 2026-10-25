@@ -34,6 +34,7 @@ https://sgmy2024.my.canva.site/g5-teaching-assistant
 | :-- | :-- |
 | `index.html` | 網站本體，雙擊就能開 |
 | `images/hero.jpg` | 標題頁背景照片（要跟 index.html 放在一起） |
+| `fonts/` | 網站字體 Noto Serif（標題）、Noto Sans（內文），每支手機都用同一種字體；授權見 `fonts/OFL.txt` |
 | `reference/canva-text.txt` | 參考網站的全部文字（2026-10-24 抓取） |
 | `reference/canva-layout.txt` | 參考網站文字照畫面由上到下的順序（含字級、顏色） |
 | `reference/canva-top.png` | 參考網站首頁截圖（手機寬度） |
