@@ -2,8 +2,8 @@
 
 > 開始日期：2026-10-24　｜　狀態：第二版完成（逐段照原網頁，不自行更改）
 
-**網址**：https://watsonlin7.github.io/maddy-web1/
-**GitHub repo**：https://github.com/watsonlin7/maddy-web1 （公開；`reference/` 不上傳）
+**網址**：https://g5files.github.io/maddy-web1/
+**GitHub repo**：https://github.com/g5files/maddy-web1 （公開；`reference/` 不上傳）
 **更新方式**：改完 `index.html` → 存版本（commit）→ 上傳（push），1～2 分鐘後網址更新
 
 ## 目標
